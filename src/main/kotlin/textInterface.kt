@@ -1,5 +1,3 @@
-import gameLogger
-
 fun clearConsole() {
 
     for (i in 1..50) println()
