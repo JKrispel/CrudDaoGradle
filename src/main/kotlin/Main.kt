@@ -1,6 +1,4 @@
 // TODO testy jednostkowe
-// TODO zamienic printy w CrudDaoImpl na wyjatki
-// TODO dodaj serializacje danych
 
 fun main() {
 
