@@ -1,0 +1,18 @@
+2024-05-15 21:39:46 ERROR CrudDaoImpl - Nie ma tej gry w bazie danych
+2024-05-15 21:56:34 INFO  CrudDaoImpl - 
+Dodales gre na PC: (PC) mc, release date: 213.432.123, modding: tak, requirements: niskie
+
+2024-05-15 21:57:10 INFO  CrudDaoImpl - Dodales gre mobilna: (Mobile) flappy bird, release date: 32.312.3144, system: ios
+
+2024-05-15 21:57:20 INFO  CrudDaoImpl - Dodales gre konsolowa: (Console) cod, release date: 2.23.312, console: ps
+
+2024-05-15 21:57:46 INFO  CrudDaoImpl - Gra cod usunieta!
+2024-05-15 21:58:01 ERROR CrudDaoImpl - Nie ma tej gry w bazie danych
+2024-05-15 21:59:54 INFO  CrudDaoImpl - 
+Dodales gre na PC: (PC) cs go, release date: 2.42.213, modding: nie, requirements: srednie
+
+2024-05-15 22:00:41 INFO  CrudDaoImpl - Wpis gry po zmianie:
+ (PC) cs go, release date: 2.42.213, modding: nie, requirements: niskie 4gb ram
+
+2024-05-15 22:08:22 INFO  CrudDaoImpl - Dodales gre konsolowa: ConsoleGame(title=candy crush, year=2341, month=12, day=12, console=aaa pomylka to gra mobilna)
+2024-05-15 22:09:00 INFO  CrudDaoImpl - Gra candy crush usunieta!
