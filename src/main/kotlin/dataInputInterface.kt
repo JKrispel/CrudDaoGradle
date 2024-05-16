@@ -257,19 +257,3 @@ fun getNumberInput(): String {
     }
     return input
 }
-
-
-fun saveToFileInterface(): String {
-
-    println("Podaj nazwe pliku do, ktorego zapisac dane:")
-
-    return readln()
-}
-
-
-fun loadFromFileInterface(): String {
-
-    println("Podaj nazwe pliku, z ktorego wczytac dane:")
-
-    return readln()
-}
