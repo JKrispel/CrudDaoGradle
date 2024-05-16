@@ -22,6 +22,5 @@ fun showMenu() {
 
 fun gameUpdatedInterface(game: Game) {
 
-    println("\nWpis gry po zmianie:\n ${game}\n")
-    gameLogger.info("Wpis gry po zmianie:\n ${game}")
+    println("\nWpis ${game.title} po zmianie:\n ${game}\n")
 }

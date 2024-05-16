@@ -51,6 +51,9 @@ class CrudDaoImpl : CrudDao {
             val game = getGame(gameName)
             if (game != null) {
                 game.edit()
+                gameUpdatedInterface(game)
+                logger.info("Nowy wpis ${game.title}:\n${game}")
+
             } else {
                 logger.error("Nie ma tej gry w bazie danych")
                 throw Exception("Nie ma tej gry w bazie danych")

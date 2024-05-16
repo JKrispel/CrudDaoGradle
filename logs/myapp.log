@@ -24,3 +24,7 @@ PcGameData(title=3, year=2, month=3, day=2, requirements=dawe, modding=ta)
 2024-05-17 00:36:28 INFO  CrudDaoImpl - Dodano nowa gre:
 ConsoleGameData(title=cod, year=123, month=123, day=22, console=ps)
 2024-05-17 00:37:35 INFO  GameLogger - Gra cod usunieta!
+2024-05-17 00:54:33 INFO  GameLogger - Wpis gry po zmianie:
+ (PC) mc, release date: 22.12.2004, modding: w pelni, requirements: bardzo niskie
+2024-05-17 00:54:33 INFO  CrudDaoImpl - Nowy wpis mc:
+(PC) mc, release date: 22.12.2004, modding: w pelni, requirements: bardzo niskie
