@@ -1,6 +1,18 @@
 // TODO testy jednostkowe
+// należy zastąpić hasło w pliku database.properties
+// rzeczywistym hasłem użytkownika root bazy danych MySQL
+// oraz ze baza danych MySQL istnieje i url do niej jest poprawny
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.transactions.transaction
 
 fun main() {
+    // Inicjalizacja połączenia z bazą danych
+    DatabaseConfig.connect()
+
+    // Tworzenie tabel, jeśli nie istnieją
+    transaction {
+        SchemaUtils.create(PcGames, MobileGames, ConsoleGames)
+    }
 
     println(
         "Witaj w CRUD Game Database,\n" +
@@ -12,7 +24,6 @@ fun main() {
     val gameDatabase: CrudDao = CrudDaoImpl() // implementuje interfejs CrudDao
 
     while (true) {
-
         showMenu()
 
         when (readln()) {
@@ -23,16 +34,11 @@ fun main() {
             "3" -> gameDatabase.updateGame(inputGameNameInterface())
             "4" -> gameDatabase.deleteGame(deleteGameInterface())
             "5" -> gameDatabase.getAllGames().forEach { println(it) }
-            "6" -> saveGameData(gameDatabase.getAllGames(), saveToFileInterface())
-            "7" -> loadGameData(loadFromFileInterface()).forEach { gameDatabase.addGame(it) }
-            "8" -> break
-
+            "6" -> break
         }
         println("Wcisnij enter, aby wrocic do menu")
         readln()
     }
 
-
     println("Do zobaczenia!")
 }
-

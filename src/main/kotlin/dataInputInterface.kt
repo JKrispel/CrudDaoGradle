@@ -1,10 +1,8 @@
 import org.slf4j.LoggerFactory
 
-// logger dodawanych, aktualizowanych i usuwanych gier
-val gameLogger = LoggerFactory.getLogger(CrudDaoImpl::class.java)
+val gameLogger = LoggerFactory.getLogger("GameLogger")
 
-fun addGameInterface(): Game {
-
+fun addGameInterface(): GameData {
     clearConsole()
     println(
         "Wybierz:\n" +
@@ -13,11 +11,9 @@ fun addGameInterface(): Game {
                 "3. Gra konsolowa\n"
     )
 
-    var newGame: Game? = null
+    var newGame: GameData? = null
 
-    fun addPC(): PcGame {
-
-
+    fun createPcGameData(): PcGameData {
         println("Podaj tytul:")
         val title = readln()
         println("Podaj rok wydania:")
@@ -31,15 +27,17 @@ fun addGameInterface(): Game {
         println("Dowolnie opisz wymagania sprzetowe:")
         val requirements = readln()
 
-        val newPcGame = PcGame(title, year.toInt(), month.toInt(), day.toInt(), requirements, modding)
-        println("\nDodales gre na PC: $newPcGame")
-        gameLogger.info("\nDodales gre na PC: $newPcGame")
-        return newPcGame
+        return PcGameData(
+            title = title,
+            year = year.toInt(),
+            month = month.toInt(),
+            day = day.toInt(),
+            requirements = requirements,
+            modding = modding
+        )
     }
 
-    fun addMobile():MobileGame {
-
-
+    fun createMobileGameData(): MobileGameData {
         println("Podaj tytul:")
         val title = readln()
         println("Podaj rok wydania:")
@@ -51,17 +49,16 @@ fun addGameInterface(): Game {
         println("Podaj system, na ktory jest gra:")
         val system = readln()
 
-
-        val newMobileGame = MobileGame(title, year.toInt(), month.toInt(), day.toInt(), system)
-        println("\nDodales gre mobilna: $newMobileGame")
-        gameLogger.info("Dodales gre mobilna: $newMobileGame")
-        return newMobileGame
+        return MobileGameData(
+            title = title,
+            year = year.toInt(),
+            month = month.toInt(),
+            day = day.toInt(),
+            system = system
+        )
     }
 
-
-    fun addConsole():ConsoleGame {
-
-
+    fun createConsoleGameData(): ConsoleGameData {
         println("Podaj tytul:")
         val title = readln()
         println("Podaj rok wydania:")
@@ -73,33 +70,66 @@ fun addGameInterface(): Game {
         println("Podaj konsole, na ktora jest gra:")
         val console = readln()
 
-
-        val newConsoleGame = ConsoleGame(title, year.toInt(), month.toInt(), day.toInt(), console)
-        println("\nDodales gre konsolowa: $newConsoleGame")
-        gameLogger.info("Dodales gre konsolowa: $newConsoleGame")
-        return newConsoleGame
+        return ConsoleGameData(
+            title = title,
+            year = year.toInt(),
+            month = month.toInt(),
+            day = day.toInt(),
+            console = console
+        )
     }
 
     var validOption = false
 
     while (!validOption) {
-
         validOption = true
         when (readln()) {
-
-
-            "1" -> newGame = addPC()
-            "2" -> newGame = addMobile()
-            "3" -> newGame = addConsole()
+            "1" -> newGame = createPcGameData()
+            "2" -> newGame = createMobileGameData()
+            "3" -> newGame = createConsoleGameData()
             else -> {
                 println("Wybierz odpowiednia z opcji")
                 validOption = false
             }
         }
     }
-    return newGame ?: throw IllegalStateException("Nie udalo sie zainicjalizowac nowej gry")
 
+    return newGame  ?: throw IllegalStateException("Nie udalo sie zainicjalizowac nowej gry")
 }
+
+interface GameData {
+
+    val title: String
+    val year: Int
+    val month: Int
+    val day: Int
+}
+
+data class PcGameData(
+    override val title: String,
+    override val year: Int,
+    override val month: Int,
+    override val day: Int,
+    val requirements: String,
+    val modding: String
+) : GameData
+
+data class MobileGameData(
+    override val title: String,
+    override val year: Int,
+    override val month: Int,
+    override val day: Int,
+    val system: String
+) : GameData
+
+data class ConsoleGameData(
+    override val title: String,
+    override val year: Int,
+    override val month: Int,
+    override val day: Int,
+    val console: String,
+) : GameData
+
 
 
 fun findGameInterface(): String {
