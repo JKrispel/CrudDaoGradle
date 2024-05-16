@@ -15,9 +15,7 @@ fun showMenu() {
                 "3. Zaaktualizuj info. o grze\n" +
                 "4. Usun gre z bazy danych\n" +
                 "5. Wyswietl wszystkie gry w bazie\n" +
-                "6. Zapisz gry do pliku\n" +
-                "7. Wczytaj gry z pliku\n" +
-                "8. Wyjdz"
+                "6. Wyjdz"
     )
 }
 

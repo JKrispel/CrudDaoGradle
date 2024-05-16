@@ -16,3 +16,11 @@ Dodales gre na PC: (PC) cs go, release date: 2.42.213, modding: nie, requirement
 
 2024-05-15 22:08:22 INFO  CrudDaoImpl - Dodales gre konsolowa: ConsoleGame(title=candy crush, year=2341, month=12, day=12, console=aaa pomylka to gra mobilna)
 2024-05-15 22:09:00 INFO  CrudDaoImpl - Gra candy crush usunieta!
+2024-05-17 00:34:18 INFO  CrudDaoImpl - Dodano nowa gre:
+PcGameData(title=mc, year=123, month=123, day=123, requirements=niskie, modding=tak)
+2024-05-17 00:35:50 INFO  CrudDaoImpl - Dodano nowa gre:
+PcGameData(title=3, year=2, month=3, day=2, requirements=dawe, modding=ta)
+2024-05-17 00:36:11 INFO  GameLogger - Gra 3 usunieta!
+2024-05-17 00:36:28 INFO  CrudDaoImpl - Dodano nowa gre:
+ConsoleGameData(title=cod, year=123, month=123, day=22, console=ps)
+2024-05-17 00:37:35 INFO  GameLogger - Gra cod usunieta!
