@@ -1,5 +1,5 @@
 // TODO testy jednostkowe
-// należy zastąpić hasło w pliku database.properties
+// przed każdym użyciem należy zastąpić HASŁO w pliku database.properties
 // rzeczywistym hasłem użytkownika root bazy danych MySQL
 // oraz ze baza danych MySQL istnieje i url do niej jest poprawny
 import org.jetbrains.exposed.sql.SchemaUtils
