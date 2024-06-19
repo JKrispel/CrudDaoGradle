@@ -1,7 +1,6 @@
-// TODO testy jednostkowe
-// przed każdym użyciem należy zastąpić HASŁO w pliku database.properties
-// rzeczywistym hasłem użytkownika root bazy danych MySQL
-// oraz ze baza danych MySQL istnieje i url do niej jest poprawny
+// UWAGA ! ! !
+// przed każdym użyciem należy zastąpić parametry w pliku "database.properties"
+// odpowiednimi do pracy z wybraną bazą danych (MySQL , PostgreSQL itp.)
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -31,7 +30,33 @@ fun main() {
             // parametrem metod są odpowiednie graficzne interfejsy zbierające dane
             "1" -> gameDatabase.addGame(addGameInterface())
             "2" -> println(gameDatabase.getGame(findGameInterface()))
-            "3" -> gameDatabase.updateGame(inputGameNameInterface())
+            "3" -> {
+                val gameName = inputGameNameInterface()
+                val option = whatToEditInterface()
+                when (option) {
+                    "1" -> {
+                        val newTitle = inputTitleInterface(gameName)
+                        gameDatabase.updateGameTitle(gameName, newTitle)
+                    }
+                    "2" -> {
+                        val dateParams = inputDateInterface(gameName)
+                        gameDatabase.updateGameDate(gameName, dateParams[0], dateParams[1], dateParams[2])
+                    }
+                    "3" -> {
+                        val game = gameDatabase.getGame(gameName)
+                        if (game is PcGame) {
+                            val descParams = inputPcDescriptionInterface(gameName)
+                            gameDatabase.updatePcGameDescription(gameName, descParams[0], descParams[1])
+                        } else if (game is MobileGame) {
+                            val system = inputMobileDescriptionInterface(gameName)
+                            gameDatabase.updateMobileGameDescription(gameName, system)
+                        } else if (game is ConsoleGame) {
+                            val console = inputConsoleDescriptionInterface(gameName)
+                            gameDatabase.updateConsoleGameDescription(gameName, console)
+                        }
+                    }
+                }
+            }
             "4" -> gameDatabase.deleteGame(deleteGameInterface())
             "5" -> gameDatabase.getAllGames().forEach { println(it) }
             "6" -> break

@@ -18,6 +18,7 @@ class CrudDaoImpl : CrudDao {
                     requirements = game.requirements
                     modding = game.modding
                 }
+
                 is MobileGameData -> MobileGame.new {
                     title = game.title
                     year = game.year
@@ -25,6 +26,7 @@ class CrudDaoImpl : CrudDao {
                     day = game.day
                     system = game.system
                 }
+
                 is ConsoleGameData -> ConsoleGame.new {
                     title = game.title
                     year = game.year
@@ -32,6 +34,7 @@ class CrudDaoImpl : CrudDao {
                     day = game.day
                     console = game.console
                 }
+
                 else -> logger.error("Nieobsługiwany typ gry: ${game.javaClass.simpleName}")
             }
         }
@@ -46,20 +49,6 @@ class CrudDaoImpl : CrudDao {
         }
     }
 
-    override fun updateGame(gameName: String) {
-        transaction {
-            val game = getGame(gameName)
-            if (game != null) {
-                game.edit()
-                gameUpdatedInterface(game)
-                logger.info("Nowy wpis ${game.title}:\n${game}")
-
-            } else {
-                logger.error("Nie ma tej gry w bazie danych")
-                throw Exception("Nie ma tej gry w bazie danych")
-            }
-        }
-    }
 
     override fun deleteGame(gameName: String) {
         transaction {
@@ -71,7 +60,7 @@ class CrudDaoImpl : CrudDao {
                     is ConsoleGame -> game.delete()
                     else -> logger.error("Nieobsługiwany typ gry: ${game.javaClass.simpleName}")
                 }
-                gameDeletedInterface(gameName)
+                logger.info("Gra $gameName usunieta!")
             } else {
                 logger.error("Nie ma tej gry w bazie danych")
                 throw Exception("Nie ma tej gry w bazie danych")
@@ -88,4 +77,74 @@ class CrudDaoImpl : CrudDao {
             games
         }
     }
+
+
+    override fun updateGameTitle(gameName: String, newTitle: String) {
+        transaction {
+            val game = getGame(gameName)
+            if (game != null) {
+                game.title = newTitle
+                logger.info("Nowy tytul ${game.title}:\n${game}")
+            } else {
+                logger.error("Nie ma tej gry w bazie danych")
+                throw Exception("Nie ma tej gry w bazie danych")
+            }
+        }
+    }
+
+    override fun updateGameDate(gameName: String, year: Int, month: Int, day: Int) {
+        transaction {
+            val game = getGame(gameName)
+            if (game != null) {
+                game.year = year
+                game.month = month
+                game.day = day
+                logger.info("Nowa data premiery ${game.title}:\n${game}")
+            } else {
+                logger.error("Nie ma tej gry w bazie danych")
+                throw Exception("Nie ma tej gry w bazie danych")
+            }
+        }
+    }
+
+    override fun updatePcGameDescription(gameName: String, modding: String, requirements: String) {
+        transaction {
+            val game = getGame(gameName) as? PcGame
+            if (game != null) {
+                game.modding = modding
+                game.requirements = requirements
+                logger.info("Nowy opis ${game.title}:\n${game}")
+            } else {
+                logger.error("Nie ma tej gry w bazie danych")
+                throw Exception("Nie ma tej gry w bazie danych")
+            }
+        }
+    }
+
+    override fun updateMobileGameDescription(gameName: String, system: String) {
+        transaction {
+            val game = getGame(gameName) as? MobileGame
+            if (game != null) {
+                game.system = system
+                logger.info("Nowy opis ${game.title}:\n${game}")
+            } else {
+                logger.error("Nie ma tej gry w bazie danych")
+                throw Exception("Nie ma tej gry w bazie danych")
+            }
+        }
+    }
+
+    override fun updateConsoleGameDescription(gameName: String, console: String) {
+        transaction {
+            val game = getGame(gameName) as? ConsoleGame
+            if (game != null) {
+                game.console = console
+                logger.info("Nowy opis ${game.title}:\n${game}")
+            } else {
+                logger.error("Nie ma tej gry w bazie danych")
+                throw Exception("Nie ma tej gry w bazie danych")
+            }
+        }
+    }
 }
+

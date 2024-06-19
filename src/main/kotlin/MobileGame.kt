@@ -22,21 +22,4 @@ class MobileGame(id: EntityID<Int>) : IntEntity(id), Game {
 
     override fun toString(): String =
         "(Mobile) $title, release date: $day.$month.$year, system: $system"
-
-    override fun edit() {
-        when (whatToEditInterface()) {
-            "1" -> {
-                title = inputTitleInterface(title)
-            }
-            "2" -> {
-                val data = inputDateInterface(title)
-                year = data[0]
-                month = data[1]
-                day = data[2]
-            }
-            "3" -> {
-                system = inputMobileDescriptionInterface(title)
-            }
-        }
-    }
 }
